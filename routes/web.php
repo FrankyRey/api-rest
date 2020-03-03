@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Middleware\ApiAuthMiddleware;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -39,7 +41,17 @@ Route::get('/estatusOrden/pruebas', 'EstatusOrdenController@pruebas');
  * DELETE: Eliminar datos o recursos.
 
 */
+
+// Rutas del usuario
 Route::post('/api/user/register', 'UserController@register');
 Route::post('api/user/login', 'UserController@login');
 Route::put('api/user/update', 'UserController@update');
-Route::post('api/user/upload', 'UserController@upload');
+Route::post('api/user/upload','UserController@upload')->middleware(ApiAuthMiddleware::class);
+Route::get('api/user/avatar/{filename}','UserController@getImage');
+Route::get('api/user/profile/{id}','UserController@profile');
+
+// Rutas de Estatus de las ordenes
+Route::resource('/api/estatusOrden', 'EstatusOrdenController');
+
+// Rutas de Ordenes
+Route::resource('api/orden', 'OrdenController');
