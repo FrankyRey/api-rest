@@ -55,3 +55,7 @@ Route::resource('/api/estatusOrden', 'EstatusOrdenController');
 
 // Rutas de Ordenes
 Route::resource('api/orden', 'OrdenController');
+
+// Rutas de Boletos
+Route::resource('api/boleto', 'BoletoController');
+Route::get('api/boletos/publicados', 'BoletoController@publicados');
