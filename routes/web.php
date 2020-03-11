@@ -59,3 +59,12 @@ Route::resource('api/orden', 'OrdenController');
 // Rutas de Boletos
 Route::resource('api/boleto', 'BoletoController');
 Route::get('api/boletos/publicados', 'BoletoController@publicados');
+
+// Rutas de Categorias de Productos
+Route::resource('api/categoriaProducto', 'CategoriaProductoController');
+
+// Rutas de Estatus de Productos
+Route::resource('api/estatusProducto', 'EstatusProductoController');
+
+// Rutas de Productos
+Route::resource('api/producto', 'ProductoController');
