@@ -45,7 +45,7 @@ class CategoriaProductoController extends Controller
     	if(!empty($params_array)) {
     		//  Validar los datos
     		$validate = \Validator::make($params_array, [
-    			'descripcion'	=> 'required',
+    			'nombre'	=> 'required',
     		]);
 
     		if($validate->fails()) {
@@ -58,7 +58,7 @@ class CategoriaProductoController extends Controller
     			// Guardar la categoria
     			$categoriaProducto = new CategoriaProducto();
     			
-    			$categoriaProducto->nombre = $params->descripcion;
+    			$categoriaProducto->nombre = $params->nombre;
 
    				$categoriaProducto->save();
     			
@@ -78,4 +78,49 @@ class CategoriaProductoController extends Controller
 
     	return response()->json($data, $data['code']);
 	}
+
+	public function update($id, Request $request) {
+    	// Recoger los datos por POST
+    	$json = $request->input('json', null);
+    	$params_array = json_decode($json, true);
+
+    	if(!empty($params_array)) {
+    		// Validar datos
+    		$validate = \Validator::make($params_array, [
+    			'nombre'	=> 'required',
+    		]);
+
+    		if($validate->fails()) {
+    			$data = array(
+    				'code'		=> 400,
+    				'status'	=> 'error',
+    				'message'	=> 'Datos erroneos',
+    			);
+    		} else {
+    			//Eliminar lo que no queremos actualizar
+    			unset($params_array['id']);
+    			unset($params_array['created_at']);
+    			unset($params_array['create_by']);
+
+    			$categoriaProducto = CategoriaProducto::where('id', $id)->update($params_array);
+
+    			$categoriaProducto_o = CategoriaProducto::find($id);
+
+    			$data = array(
+    				'code'		=> 200,
+    				'status'	=> 'success',
+    				'categoriaProducto'		=>	$categoriaProducto_o,
+    				'changes'	=> $params_array,
+    			);
+    		}
+    	} else {
+    		$data = array(
+    			'code'		=> 400,
+    			'status'	=> 'error',
+    			'message'	=> 'Datos erroneos',
+    		);
+    	}
+
+    	return response()->json($data, $data['code']);
+    }
 }
