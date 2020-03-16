@@ -49,6 +49,7 @@ Route::put('api/user/update', 'UserController@update');
 Route::post('api/user/upload','UserController@upload')->middleware(ApiAuthMiddleware::class);
 Route::get('api/user/avatar/{filename}','UserController@getImage');
 Route::get('api/user/profile/{id}','UserController@profile');
+Route::get('api/user/all','UserController@index');
 
 // Rutas de Estatus de las ordenes
 Route::resource('/api/estatusOrden', 'EstatusOrdenController');

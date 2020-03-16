@@ -10,10 +10,10 @@ class Producto extends Model
 
     //Relación muchos a uno
     public function estatus() {
-    	return $this->belongsTo('App\EstatusProducto', 'estatus_producto');
+    	return $this->belongsTo('App\EstatusProducto', 'estatus');
     }
 
     public function categoria() {
-    	return $this->belongsTo('App\CategoriaProducto', 'categoria_producto');
+    	return $this->belongsTo('App\CategoriaProducto', 'categoria');
     }
 }

@@ -12,6 +12,16 @@ class UserController extends Controller
     	return "Accion de pruebas de USER-CONTROLLER";
     }
 
+    public function index() {
+        $usuarios = User::all();
+
+        return response()->json([
+            'code'      => 200,
+            'status'    => 'success',
+            'usuarios' => $usuarios
+        ], 200);
+    }
+
     public function register(Request $request) {
 
     	//Recoger los datos del usuario por POST
@@ -27,7 +37,7 @@ class UserController extends Controller
 	    	//Validar datos, unique para campos unicos
     		$validate = \Validator::make($params_array, [
     			'name' 		=> 'required|alpha',
-    			'lastName'	=> 'required|alpha',
+    			'last_name'	=> 'required|alpha',
     			'username'	=> 'required|alpha|unique:users',
 	    		'email'		=> 'required|email|unique:users',
     			'password'	=> 'required'
@@ -54,7 +64,7 @@ class UserController extends Controller
     			//Crear el usuario
     			$user = new User();
     			$user->name 	= $params_array['name'];
-    			$user->last_name	= $params_array['lastName'];
+    			$user->last_name	= $params_array['last_name'];
     			$user->username = $params_array['username'];
     			$user->email 	= $params_array['email'];
     			$user->password = $pwd;

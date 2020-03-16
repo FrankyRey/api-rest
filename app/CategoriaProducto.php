@@ -10,6 +10,6 @@ class CategoriaProducto extends Model
 
     //Relación uno a muchos
     public function ordenes() {
-    	return $this->hasMany('App\Producto', 'categoria_producto');
+    	return $this->hasMany('App\Producto', 'categoria');
     }
 }
