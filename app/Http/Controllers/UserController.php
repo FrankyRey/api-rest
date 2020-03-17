@@ -158,7 +158,7 @@ class UserController extends Controller
     		$validate = \Validator::make($params_array, [
     			'name' 		=> 'required|alpha',
     			'last_name'	=> 'required|alpha',
-	    		'email'		=> 'required|email|unique:users,'.$user->sub,
+	    		'email'		=> 'required|email',
     		]);
 
     		// Quitar los campos que no quiero actualizar
@@ -168,6 +168,7 @@ class UserController extends Controller
     		unset($params_array['created_at']);
     		unset($params_array['remember_token']);
     		unset($params_array['username']);
+            unset($params_array['email']);
 
     		// Actualizar usuario en bdd
     		$user_update = User::where('id', $user->sub)->update($params_array);
