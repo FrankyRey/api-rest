@@ -69,3 +69,10 @@ Route::resource('api/estatusProducto', 'EstatusProductoController');
 
 // Rutas de Productos
 Route::resource('api/producto', 'ProductoController');
+
+// Rutas de Estatus de Clientes
+Route::resource('api/estatusCliente', 'EstatusClienteController');
+
+//Rutas de Clientes
+Route::resource('api/cliente', 'ClienteController');
+Route::get('api/clientes/{email}', 'ClienteController@email');

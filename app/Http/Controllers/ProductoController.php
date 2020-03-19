@@ -15,7 +15,7 @@ class ProductoController extends Controller
 	}
 
     public function index() {
-    	$productos = Producto::all()->load('categoria', 'estatus');
+		$productos = Producto::all()->load( 'estatus', 'categoria');
 
     	return response()->json([
     		'code'		=> 200,
@@ -121,6 +121,31 @@ class ProductoController extends Controller
     			'code'		=> 400,
     			'status'	=> 'error',
     			'message'	=> 'Datos erroneos',
+    		);
+    	}
+
+    	return response()->json($data, $data['code']);
+	}
+	
+	public function destroy($id, Request $request) {
+    	// Conseguir el registro
+    	$producto = Producto::find($id);
+
+    	if(!empty($producto)) {
+    		// Borarlo
+    		$producto->delete();
+
+    		// Devolver algo
+    		$data = array(
+    			'code'		=> 200,
+    			'status'	=> 'success',
+    			'producto'		=> $producto
+    		);
+    	} else {
+    		$data = array(
+    			'code'		=> 400,
+    			'status'	=> 'error',
+    			'message'	=> 'El boleto no existe',
     		);
     	}
 
