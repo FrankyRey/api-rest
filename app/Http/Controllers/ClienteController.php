@@ -65,7 +65,10 @@ class ClienteController extends Controller
     	if(!empty($params_array)) {
     		//  Validar los datos
     		$validate = \Validator::make($params_array, [
-    			'email'	=> 'required|unique',
+    			'email'	=> 'required',
+                'name'  => 'required',
+                'last_name' => 'required',
+                'birthdate' => 'required',
     		]);
 
     		if($validate->fails()) {
@@ -76,16 +79,20 @@ class ClienteController extends Controller
     			];
     		} else {
     			// Guardar la categoria
-    			$estatusCliente = new EstatusCliente();
+    			$cliente = new Cliente();
     			
-    			$estatusCliente->nombre = $params->nombre;
+    			$cliente->email = $params->email;
+                $cliente->name = $params->name;
+                $cliente->last_name = $params->last_name;
+                $cliente->birthdate = $params->birthdate;
+                $cliente->phone_number = $params->phone_number;
 
-   				$estatusCliente->save();
+   				$cliente->save();
     			
     			$data = [
     				'code'		=> 200,
     				'status'	=> 'success',
-    				'estatusCliente'	=> $estatusCliente,
+    				'cliente'	=> $cliente,
     			];
     		}
     	} else {
