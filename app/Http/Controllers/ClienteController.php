@@ -68,7 +68,7 @@ class ClienteController extends Controller
     			'email'	=> 'required',
                 'name'  => 'required',
                 'last_name' => 'required',
-                'birthdate' => 'required',
+                'birthday' => 'required',
     		]);
 
     		if($validate->fails()) {
@@ -84,7 +84,7 @@ class ClienteController extends Controller
     			$cliente->email = $params->email;
                 $cliente->name = $params->name;
                 $cliente->last_name = $params->last_name;
-                $cliente->birthdate = $params->birthdate;
+                $cliente->birthday = $params->birthday;
                 $cliente->phone_number = $params->phone_number;
 
    				$cliente->save();

@@ -60,12 +60,15 @@ class CategoriaProductoController extends Controller
     			
     			$categoriaProducto->nombre = $params->nombre;
 
-   				$categoriaProducto->save();
+				$categoriaProducto->save();
+
+				$categoriasProductos = CategoriaProducto::all();   
     			
     			$data = [
     				'code'		=> 200,
     				'status'	=> 'success',
-    				'categoriaProducto'	=> $categoriaProducto,
+					'categoriaProducto'	=> $categoriaProducto,
+					'categoriasProductos' => $categoriasProductos,
     			];
     		}
     	} else {
