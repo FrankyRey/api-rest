@@ -76,3 +76,6 @@ Route::resource('api/estatusCliente', 'EstatusClienteController');
 //Rutas de Clientes
 Route::resource('api/cliente', 'ClienteController');
 Route::get('api/clientes/{email}', 'ClienteController@email');
+
+//Rutas de DesgloseOrden
+Route::resource('api/desgloseOrden', 'DesgloseOrdenController');
