@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 use App\Orden;
+use App\Cliente;
 use App\Helpers\JwtAuth;
 
 class OrdenController extends Controller
@@ -63,7 +64,6 @@ class OrdenController extends Controller
     		//  Validar los datos
     		$validate = \Validator::make($params_array, [
     			'monto'		=> 'required',
-    			'estatus'	=> 'required',
     		]);
 
     		if($validate->fails()) {
@@ -76,17 +76,21 @@ class OrdenController extends Controller
     			// Guardar la orden
     			$orden = new Orden();
     			if($params->monto>=10) {
-    				$orden->create_by  = $user->sub;
-    				$orden->estatus = $params->estatus;
-    				$orden->monto = $params->monto;
-    				$orden->facturable = 1;
-    				$orden->save();
+					if($params->procedencia == 1) {
+    					$orden->cliente = $params->cliente;
+    					$orden->estatus = $params->estatus;
+    					$orden->monto = $params->monto;
+    					$orden->facturable = 1;
+						$orden->save();
+					}
     			} else {
-    				$orden->create_by  = $user->sub;
-    				$orden->estatus = $params->estatus;
-    				$orden->monto = $params->monto;
-    				$orden->facturable = 0;
-    				$orden->save();
+    				if($params->procedencia == 1) {
+    					$orden->cliente = $params->cliente;
+    					$orden->estatus = $params->estatus;
+    					$orden->monto = $params->monto;
+    					$orden->facturable = 1;
+						$orden->save();
+					}
     			}
 
     			$data = [

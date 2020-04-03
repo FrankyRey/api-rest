@@ -11,4 +11,9 @@ class Cliente extends Model
     public function estatus() {
     	return $this->belongsTo('App\EstatusCliente', 'estatus');
     }
+
+    //Relación uno a muchos
+    public function clientes(){
+        return $this->hasMany('App\Cliente');
+    }
 }

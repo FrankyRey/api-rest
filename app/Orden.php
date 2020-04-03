@@ -20,4 +20,8 @@ class Orden extends Model
     public function cobrada(){
         return $this->belongsTo('App\User', 'cobrada_por');
     }
+
+    public function cliente(){
+        return $this->belongsTo('App\Cliente', 'cliente');
+    }
 }
