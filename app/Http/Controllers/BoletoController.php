@@ -86,7 +86,7 @@ class BoletoController extends Controller
     			
     			$boleto->descripcion = $params->descripcion;
 				$boleto->precio_venta = $params->precio_venta;
-				$boleto-publicado = $params->publicado;
+				$boleto->publicado = $params->publicado;
 
    				$boleto->save();
     			
